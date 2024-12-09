@@ -1,4 +1,3 @@
-import React from 'react';
 import { bonsaiPets } from '../data/pets';
 
 export function PetGallery() {

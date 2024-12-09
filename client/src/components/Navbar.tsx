@@ -1,4 +1,3 @@
-import React from 'react';
 import { Menu } from 'lucide-react';
 
 export function Navbar() {
