@@ -1,21 +1,47 @@
-import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthForm } from './components/Auth/AuthForm';
+import { ProtectedRoute } from './components/Layout/ProtectedRoute';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { PetGallery } from './components/PetGallery';
 import { Testimonials } from './components/Testimonials';
 import { DIYSection } from './components/DIYSection';
 import { WorkshopBooking } from './components/WorkshopBooking';
+import { useAuthStore } from './store/AuthStore';
 
-function App() {
+function MainContent() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
       <Navbar />
       <Hero />
       <PetGallery />
       <Testimonials />
       <DIYSection />
       <WorkshopBooking />
-    </div>
+    </>
+  );
+}
+
+function App() {
+  const { isAuthenticated } = useAuthStore();
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/auth"
+          element={isAuthenticated ? <Navigate to="/" replace /> : <AuthForm />}
+        />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <MainContent />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
