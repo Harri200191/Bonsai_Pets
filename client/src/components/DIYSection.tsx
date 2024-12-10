@@ -1,4 +1,3 @@
-import React from 'react';
 import { Package, Book, Video, Heart } from 'lucide-react';
 
 export function DIYSection() {
